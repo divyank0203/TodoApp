@@ -55,5 +55,20 @@ res.json({
 })
 })
 
+app.put('/update', async function(req, res){
+    const todoId = req.body;
+    const val3 = updateTodoschema.safeParse(todoId);
+    if(!val3.success){
+        res.status(411).json({
+            msg: "You sent the wrong inputs"
+        })
+        return;
+    }
+    await Todo.updateOne({ _id: req.body.id}, {description: req.body.description, title: req.body.title})
+    res.json({
+        msg: "Todo updated successfully"
+    })
+})
+
 
 app.listen(3000);
