@@ -4,27 +4,31 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import CreateTodo from './Components/CreateTodo'
 import Todos from './Components/Todos'
+import { useEffect } from 'react'
 
 
 function App() {
-  const [count, setCount] = useState(0)
   const [todos, setTodos] = useState([]);
 
-  fetch("http://localhost:3000/todos")
-    .then(async function(response){ 
-      const json = await response.json();
-      setTodos(json);
-    });
+  const fetchTodos = () => {
+    fetch("http://localhost:3000/todos")
+      .then(async function(response){ 
+        const json = await response.json();
+        setTodos(json);
+      });
+  };
 
-
+  useEffect(() => {
+    fetchTodos();
+  }, []);
 
   return (
     <>
-      <CreateTodo />
-      <Todos todos={todos} ></Todos>
-    
+      <CreateTodo onTodoAdded={fetchTodos} />
+      <Todos todos={todos} />
     </>
   )
 }
+
 
 export default App
