@@ -2,6 +2,8 @@ const express = require("express");
 const { Todo } = require("./db");
 const { createTodoschema, updateTodoschema } = require("./types");
 const app = express();
+const cors = require('cors');
+app.use(cors());
 // const zod = require("zod");
 
 // const schema = zod.object({
