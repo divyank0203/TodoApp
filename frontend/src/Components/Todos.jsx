@@ -26,10 +26,10 @@ function Todos({todos}) {
           <h2 className='text-lg m-2'>{todo.description}</h2>
           <button 
           onClick={function(){
-            fetch("http//localhost:3000/completed",{
+            fetch("http://localhost:3000/completed",{
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ completed: !todo.completed })
+                body: JSON.stringify({ id: todo.id, completed: true })
             })
             .then(async function(res){
               await res.json();

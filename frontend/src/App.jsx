@@ -18,6 +18,8 @@ function App() {
       });
   };
 
+  
+
   useEffect(() => {
     fetchTodos();
   }, []);
@@ -25,7 +27,7 @@ function App() {
   return (
     <>
       <CreateTodo onTodoAdded={fetchTodos} />
-      <Todos todos={todos} />
+      <Todos todos={todos} onTodoUpdated={fetchTodos} />
     </>
   )
 }
