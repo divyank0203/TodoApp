@@ -13,7 +13,7 @@ function CreateTodo() {
         <input id='desc' type="text" placeholder='Description'  className='p-3 border border-gray-300 rounded m-2' value={description} onChange={e => setDescription(e.target.value)} /> <br />
         <button className='bg-blue-500 text-white p-3 rounded m-3 border-solid border-2 border-blue-700'
 onClick={function(){
-          fetch("http://localhost:3000/todos", {
+          fetch("http://localhost:3000/todo", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ title, description })

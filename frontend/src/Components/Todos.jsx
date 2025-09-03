@@ -24,7 +24,20 @@ function Todos({todos}) {
         return <div className='border-solid border-2 border-gray-300 p-4 m-2 rounded' key={todo.id}>
           <h1 className='text-xl font-bold m-2'>{todo.title}</h1>
           <h2 className='text-lg m-2'>{todo.description}</h2>
-          <button className={`p-2 m-2 rounded ${todo.completed ? "bg-green-500" : "bg-red-500"}`}>{todo.completed === true ? "Completed" : "Mark As Complete"}</button>
+          <button 
+          onClick={function(){
+            fetch("http//localhost:3000/completed",{
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ completed: !todo.completed })
+            })
+            .then(async function(res){
+              await res.json();
+              alert("Todo Updated");
+              if (onTodoUpdated) onTodoUpdated(); // Trigger re-fetch
+            })
+          }}
+          className={`p-2 m-2 rounded ${todo.completed ? "bg-green-500" : "bg-red-500"}`}>{todo.completed === true ? "Completed" : "Mark As Complete"}</button>
         </div>
       })}
     </div>
